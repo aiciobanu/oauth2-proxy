@@ -151,6 +151,8 @@ func (p *ProviderData) buildSessionFromClaims(idToken *oidc.IDToken) (*sessions.
 		return nil, fmt.Errorf("couldn't extract claims from id_token (%v)", err)
 	}
 
+	logger.Printf("buildSessionFromClaims - claims: %v", claims)
+
 	ss.User = claims.Subject
 	ss.Email = claims.Email
 	ss.Groups = claims.Groups
@@ -221,9 +223,5 @@ func (p *ProviderData) extractGroups(claims map[string]interface{}) []string {
 		}
 		groups = append(groups, formattedGroup)
 	}
-
-	// Added logging
-	fmt.Printf("extractGroups - groups: %v\n", groups)
-
 	return groups
 }
