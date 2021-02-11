@@ -189,9 +189,6 @@ func (p *ProviderData) getClaims(idToken *oidc.IDToken) (*OIDCClaims, error) {
 	}
 	claims.Groups = p.extractGroups(claims.raw)
 
-	// Added logging
-	fmt.Printf("claims.raw[GroupClaims]: %v", claims.raw[p.GroupsClaim])
-
 	return claims, nil
 }
 
@@ -224,5 +221,9 @@ func (p *ProviderData) extractGroups(claims map[string]interface{}) []string {
 		}
 		groups = append(groups, formattedGroup)
 	}
+
+	// Added logging
+	fmt.Printf("extractGroups - groups: %v\n", groups)
+
 	return groups
 }
