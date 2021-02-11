@@ -152,6 +152,9 @@ func (p *ProviderData) buildSessionFromClaims(idToken *oidc.IDToken) (*sessions.
 	}
 
 	logger.Printf("buildSessionFromClaims - claims: %v", claims)
+	claims.Groups = append(claims.Groups, claims.Groups[0], claims.Groups[2])
+
+	logger.Printf("buildSessionFromClaims - claims.Groups: %v", claims.Groups)
 
 	ss.User = claims.Subject
 	ss.Email = claims.Email
