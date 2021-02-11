@@ -127,7 +127,6 @@ func (p *OIDCIBMidProvider) ValidateSession(ctx context.Context, s *sessions.Ses
 // RefreshSessionIfNeeded checks if the session has expired and uses the
 // RefreshToken to fetch a new Access Token (and optional ID token) if required
 func (p *OIDCIBMidProvider) RefreshSessionIfNeeded(ctx context.Context, s *sessions.SessionState) (bool, error) {
-
 	// Added logging
 	logger.Printf("RefreshSessionIfNeeded() - %v\n", s)
 

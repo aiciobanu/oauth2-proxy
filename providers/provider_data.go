@@ -189,6 +189,9 @@ func (p *ProviderData) getClaims(idToken *oidc.IDToken) (*OIDCClaims, error) {
 	}
 	claims.Groups = p.extractGroups(claims.raw)
 
+	// Added logging
+	fmt.Printf("claims.Groups: %v", claims.Groups)
+
 	return claims, nil
 }
 
