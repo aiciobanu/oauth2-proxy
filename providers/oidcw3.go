@@ -206,8 +206,7 @@ func (p *OIDCIBMW3idProvider) CreateSessionFromToken(ctx context.Context, token 
 	}
 
 	// Added logging
-	logger.Printf("Token: %v\n", idToken)
-	fmt.Println("New Image Test")
+	logger.Printf("CreateSessionFromToken - Token: %v\n", idToken)
 
 	ss, err := p.buildSessionFromClaims(idToken)
 	if err != nil {
@@ -223,8 +222,6 @@ func (p *OIDCIBMW3idProvider) CreateSessionFromToken(ctx context.Context, token 
 	ss.IDToken = token
 	ss.RefreshToken = ""
 	ss.ExpiresOn = &idToken.Expiry
-
-	fmt.Printf("CreateSessionFromToken - ss.IDToken: %v\n", ss.IDToken)
 
 	return ss, nil
 }
