@@ -223,6 +223,8 @@ func (p *OIDCIBMW3idProvider) CreateSessionFromToken(ctx context.Context, token 
 	ss.RefreshToken = ""
 	ss.ExpiresOn = &idToken.Expiry
 
+	fmt.Printf("CreateSessionFromToken - ss.IDToken: %v", ss.IDToken)
+
 	return ss, nil
 }
 

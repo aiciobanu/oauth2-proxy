@@ -189,9 +189,6 @@ func (p *ProviderData) getClaims(idToken *oidc.IDToken) (*OIDCClaims, error) {
 	}
 	claims.Groups = p.extractGroups(claims.raw)
 
-	fmt.Printf("\ngetClaims - claims.Groups %v\n", claims.Groups)
-	fmt.Printf("\ngetClaims - claims %v\n", claims)
-
 	return claims, nil
 }
 
@@ -199,9 +196,6 @@ func (p *ProviderData) getClaims(idToken *oidc.IDToken) (*OIDCClaims, error) {
 // If the claim isn't present, `nil` is returned. If the groups claim is
 // present but empty, `[]string{}` is returned.
 func (p *ProviderData) extractGroups(claims map[string]interface{}) []string {
-
-	fmt.Printf("\nextractGroups - claims[p.GroupsClaim]: %v\n", claims[p.GroupsClaim])
-
 	rawClaim, ok := claims[p.GroupsClaim]
 	if !ok {
 		return nil
