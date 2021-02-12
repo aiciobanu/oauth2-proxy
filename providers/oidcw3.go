@@ -102,10 +102,6 @@ func (p *OIDCIBMW3idProvider) enrichFromProfileURL(ctx context.Context, s *sessi
 		s.Email = email
 	}
 
-	// Added loggin
-	fmt.Printf("len s.Groups - %v\n", len(s.Groups))
-	fmt.Printf("s.Groups - %v\n", s.Groups)
-
 	if len(s.Groups) > 0 {
 		return nil
 	}

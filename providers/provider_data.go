@@ -189,6 +189,10 @@ func (p *ProviderData) getClaims(idToken *oidc.IDToken) (*OIDCClaims, error) {
 	}
 	claims.Groups = p.extractGroups(claims.raw)
 
+	// Added logging
+	fmt.Printf("\ngetClaims - claims.Groups %v\n", claims.Groups)
+	fmt.Printf("\ngetClaims - claims %v\n", claims)
+
 	return claims, nil
 }
 
