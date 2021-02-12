@@ -151,13 +151,15 @@ func (p *ProviderData) buildSessionFromClaims(idToken *oidc.IDToken) (*sessions.
 		return nil, fmt.Errorf("couldn't extract claims from id_token (%v)", err)
 	}
 
-	logger.Printf("buildSessionFromClaims - claims: %v", claims)
+	logger.Printf("claims.Subject: %v", claims.Subject)
+	logger.Printf("claims.Groups: %v", claims.Groups)
+	logger.Printf("claims.Email: %v", claims.Email)
+	logger.Printf("claims.Verified: %v", claims.Verified)
+	logger.Printf("claims.raw: %v", claims.raw)
 
 	ss.User = claims.Subject
 	ss.Email = claims.Email
 	ss.Groups = claims.Groups
-
-	logger.Printf("buildSessionFromClaims - ss.Groups: %s", ss.Groups)
 
 	// TODO (@NickMeves) Deprecate for dynamic claim to session mapping
 	if pref, ok := claims.raw["preferred_username"].(string); ok {
@@ -192,6 +194,8 @@ func (p *ProviderData) getClaims(idToken *oidc.IDToken) (*OIDCClaims, error) {
 		claims.Email = fmt.Sprint(email)
 	}
 	claims.Groups = p.extractGroups(claims.raw)
+
+	logger.Print("getClaims - claims.Groups -> %v", claims.Groups)
 
 	return claims, nil
 }
