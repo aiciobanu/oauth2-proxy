@@ -152,11 +152,12 @@ func (p *ProviderData) buildSessionFromClaims(idToken *oidc.IDToken) (*sessions.
 	}
 
 	logger.Printf("buildSessionFromClaims - claims: %v", claims)
-	logger.Printf("buildSessionFromClaims - claims.Groups: %s", claims.Groups)
 
 	ss.User = claims.Subject
 	ss.Email = claims.Email
 	ss.Groups = claims.Groups
+
+	logger.Printf("buildSessionFromClaims - ss.Groups: %s", ss.Groups)
 
 	// TODO (@NickMeves) Deprecate for dynamic claim to session mapping
 	if pref, ok := claims.raw["preferred_username"].(string); ok {
