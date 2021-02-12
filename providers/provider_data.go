@@ -151,12 +151,6 @@ func (p *ProviderData) buildSessionFromClaims(idToken *oidc.IDToken) (*sessions.
 		return nil, fmt.Errorf("couldn't extract claims from id_token (%v)", err)
 	}
 
-	logger.Printf("claims.Subject: %v", claims.Subject)
-	logger.Printf("claims.Groups: %v", claims.Groups)
-	logger.Printf("claims.Email: %v", claims.Email)
-	logger.Printf("claims.Verified: %v", claims.Verified)
-	logger.Printf("claims.raw: %v", claims.raw)
-
 	ss.User = claims.Subject
 	ss.Email = claims.Email
 	ss.Groups = claims.Groups
@@ -194,8 +188,6 @@ func (p *ProviderData) getClaims(idToken *oidc.IDToken) (*OIDCClaims, error) {
 		claims.Email = fmt.Sprint(email)
 	}
 	claims.Groups = p.extractGroups(claims.raw)
-
-	logger.Print("getClaims - claims.Groups -> %v", claims.Groups)
 
 	return claims, nil
 }

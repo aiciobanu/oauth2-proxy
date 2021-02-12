@@ -213,6 +213,8 @@ func (p *OIDCIBMW3idProvider) CreateSessionFromToken(ctx context.Context, token 
 		return nil, err
 	}
 
+	logger.Printf("ss.Groups - %v", ss.Groups)
+
 	// Allow empty Email in Bearer case since we can't hit the ProfileURL
 	if ss.Email == "" {
 		ss.Email = ss.User
