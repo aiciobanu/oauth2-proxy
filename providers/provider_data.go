@@ -190,6 +190,11 @@ func (p *ProviderData) getClaims(idToken *oidc.IDToken) (*OIDCClaims, error) {
 	claims.Groups = p.extractGroups(claims.raw)
 
 	// Added logging
+
+	for k, v := range claims.Groups {
+		fmt.Printf("Claims Group: %v - %v", k, v)
+	}
+
 	fmt.Printf("\ngetClaims - claims.Groups %v\n", claims.Groups)
 	fmt.Printf("\ngetClaims - claims %v\n", claims)
 
