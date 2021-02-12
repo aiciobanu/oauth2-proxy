@@ -55,8 +55,10 @@ func (p *OIDCIBMW3idProvider) Redeem(ctx context.Context, redirectURL, code stri
 	}
 
 	// Added logging
-	fmt.Printf("Redeem - GroupsClaim: %v\n", p.GroupsClaim)
 	logger.Printf("Redeem - Token: %v\n", token)
+	fmt.Printf("Redeem - GroupsClaim: %v\n", p.GroupsClaim)
+	fmt.Printf("Redeem - token.Extra blueGroups: %v\n", token.Extra("blueGroups"))
+	fmt.Printf("Redeem - toke.WithExtra blueGroups: %v\n", token.WithExtra("blueGroups"))
 
 	return p.createSession(ctx, token, false)
 }
