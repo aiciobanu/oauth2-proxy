@@ -102,6 +102,10 @@ func (p *OIDCIBMW3idProvider) enrichFromProfileURL(ctx context.Context, s *sessi
 		s.Email = email
 	}
 
+	// Added loggin
+	fmt.Printf("len s.Groups - %v\n", len(s.Groups))
+	fmt.Printf("s.Groups - %v\n", s.Groups)
+
 	if len(s.Groups) > 0 {
 		return nil
 	}
@@ -198,7 +202,7 @@ func (p *OIDCIBMW3idProvider) redeemRefreshToken(ctx context.Context, s *session
 // CreateSessionFromToken converts Bearer IDTokens into sessions
 func (p *OIDCIBMW3idProvider) CreateSessionFromToken(ctx context.Context, token string) (*sessions.SessionState, error) {
 	// Added logging
-	logger.Printf("Token: %v\n", token)
+	logger.Printf("First Token: %v\n", token)
 
 	idToken, err := p.Verifier.Verify(ctx, token)
 	if err != nil {
@@ -212,8 +216,6 @@ func (p *OIDCIBMW3idProvider) CreateSessionFromToken(ctx context.Context, token 
 	if err != nil {
 		return nil, err
 	}
-
-	logger.Printf("ss.Groups - %v", ss.Groups)
 
 	// Allow empty Email in Bearer case since we can't hit the ProfileURL
 	if ss.Email == "" {
